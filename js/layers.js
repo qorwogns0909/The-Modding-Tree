@@ -29,19 +29,51 @@ addLayer("돈", {
         rows: 4,
         cols: 4,
         11: {
-            title: "시작",
+            title: "11번: 시작",
             description: "초당 1 점수를 휙득합니다.",
             cost: new Decimal(1),
+            unlocked() { return hasAchievement("업", 11) },
         },
         12: {
-            title: "증가",
+            title: "12번: 증가",
             description: "현재 돈에 비례해 점수 휙득량이 증가합니다.",
             cost: new Decimal(1),           
             effect() {
                 return player[this.layer].points.add(1).pow(0.5)
             },
             effectDisplay() { return format(upgradeEffect(this.layer, this.id))+"x" }, // Add formatting to the effect
+            unlocked() { return hasUpgrade("돈", 11) },
         }
     },
 
+})
+
+addLayer("업", {
+    startData() { return {                  // startData is a function that returns default data for a layer. 
+        unlocked: true,                     // You can add more variables here to add them to your layer.
+    }},
+    color: "#FFFFFF",                       // The color for this layer, which affects many elements.          // The name of this layer's main prestige resource.
+    row: "side",                                 // The row this layer is on (0 is the first row).
+    layerShown() { return true },          // Returns a bool for if this layer's node should be visible in the tree.
+    tooltip() { // Optional, tooltip displays when the layer is locked
+        return ("Achievements")
+    },
+    upgrades: {
+        // Look in the upgrades docs to see what goes here!
+    },
+    achievements: {
+        rows: 16,
+        cols: 5,
+        11: {
+            name: "시작",
+            done() { return player.돈.points.gt(0) },
+            tooltip: "1원을 얻으세요. 보상: 돈 업그레이드 11 해제",
+        },
+    },
+    tabFormat: [
+        "blank", 
+        ["display-text", function() { return "업적: "+player.업.achievements.length+"/"+(Object.keys(tmp.업.achievements).length-2) }], 
+        "blank", "blank",
+        "achievements",
+    ],
 })
