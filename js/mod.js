@@ -22,7 +22,10 @@ let changelog = `<h1>Changelog:</h1><br>
 		- Added things.<br>
 		- Added stuff.<br>
 	<h3>v0.1</h3><br>
-		- 레이어 '돈' 추가.`
+		- 레이어 '돈' 추가.<br>
+		- '돈' 업그레이드 2개 추가.<br>'
+		- 레이어 '업적' 추가.<br>
+		- 업적 1개 추가.<br>`
 
 
 let winText = `축하합니다! 당신은 게임 끝에 도달하였습니다! 다음 업데이트를 기다려 주세요!`
